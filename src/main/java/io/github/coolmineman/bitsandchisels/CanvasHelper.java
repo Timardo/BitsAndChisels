@@ -14,7 +14,7 @@ public class CanvasHelper {
     private CanvasHelper() { }
 
     public static RenderMaterial getMaterial(BlockState state, Sprite sprite) {
-        io.vram.frex.api.material.RenderMaterial material = MaterialMap.get(state).getMapped(sprite);
+        io.vram.frex.api.material.RenderMaterial material = null;//MaterialMap.get(state).getMapped(sprite);
         if (material != null) {
             MaterialFinder finder = Renderer.get().materials().materialFinder().copyFrom(material);
             RenderTypeUtil.toMaterialFinder(finder, RenderLayers.getBlockLayer(state));

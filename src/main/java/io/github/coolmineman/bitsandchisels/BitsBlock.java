@@ -22,6 +22,7 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
 
 public class BitsBlock extends Block implements BlockEntityProvider, Waterloggable {
 
@@ -36,7 +37,7 @@ public class BitsBlock extends Block implements BlockEntityProvider, Waterloggab
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         return getDefaultState().with(Properties.WATERLOGGED, ctx.getWorld().getFluidState(ctx.getBlockPos()).getFluid() == Fluids.WATER);
     }
-
+ 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (state.get(Properties.WATERLOGGED).booleanValue()) {
@@ -56,11 +57,13 @@ public class BitsBlock extends Block implements BlockEntityProvider, Waterloggab
     }
 
     @Override
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (world instanceof ServerWorld && blockEntity != null) {
             dropStack(world, pos, ItemHelpers.blockToItem(this, blockEntity));
         }
+        
+        return state;
     }
 
     @Override
@@ -69,7 +72,7 @@ public class BitsBlock extends Block implements BlockEntityProvider, Waterloggab
     }
 
     @Override
-    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
+    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
         return ItemHelpers.blockToItem(this, world.getBlockEntity(pos));
     }
     

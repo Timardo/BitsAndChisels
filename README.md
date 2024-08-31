@@ -1,3 +1,5 @@
+## This is an updated version for 1.20.4 dedicated for a private server with some unused compat features omitted. Use at your own risk.
+
 # Bits And Chisels
 ![Java CI with Brachyura](https://github.com/CoolMineman/BitsAndChisels/workflows/Java%20CI%20with%20Brachyura/badge.svg)
 [https://github.com/CoolMineman/BitsAndChisels](https://github.com/CoolMineman/BitsAndChisels)
